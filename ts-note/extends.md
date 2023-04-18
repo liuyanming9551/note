@@ -78,4 +78,16 @@ B类型继承了A类型
 ```
 在条件判断类型的定义中，将泛型参数使用[]括起来，即可阻断条件判断类型的分配，此时，传入参数`T`的类型将被当做一个整体，不再分配。
 
+```ts
+interface Pro {
+    name: string;
+    price: number;
+    count: number;
+}
+
+type Pkeys = keyof Pro // 这里是推断不出具体的key类型
+
+type AllKeys<T> = T extends any ? T : never;
+type PAllKeys = AllKeys<keyof Pro> // 'name' | 'price' | 'count'
+```
 
